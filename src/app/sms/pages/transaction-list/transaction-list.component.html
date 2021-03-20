@@ -1,0 +1,47 @@
+<!--Extended Table starts-->
+<div class="row text-left">
+  <div class="col-12">
+    <div class="content-header">Transactions</div>
+    <p class="content-sub-header">List of transactions</p>
+  </div>
+</div>
+<section id="extended">
+  <div class="row text-left">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Transactions</h4>
+        </div>
+        <div class="card-content">
+          <div class="card-body">
+            <table class="table table-responsive-md text-center" *ngIf="transactions && transactions.length > 0">
+              <thead>
+              <tr>
+                <th>Id</th>
+                <th>amount</th>
+                <th>Church Member Id</th>
+                <th>Status</th>
+                <th>Transaction Type</th>
+                <th>Mpesa RefId</th>
+                <th>Transaction Date</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let transaction of transactions">
+                <td>{{transaction.id}}</td>
+                <td>{{transaction.amount}}</td>
+                <td>{{transaction.churchMemberId}}</td>
+                <td>{{transaction.status}}</td>
+                <td>{{transaction.transactionType}}</td>
+                <td>{{transaction.mpesaRefId}}</td>
+                <td>{{transaction.transactionDate}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--Extended Table Ends-->

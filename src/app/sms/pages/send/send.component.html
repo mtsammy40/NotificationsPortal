@@ -1,0 +1,190 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="content-header">Send Sms</div>
+    </div>
+</div>
+<section id="ngx">
+    <div class="card">
+        <div class="card-content">
+            <div class="card-body">
+                <aw-wizard #wizard navBarLayout="large-empty-symbols">
+                    <aw-wizard-step [stepTitle]="'Enter Recepients'"
+                        [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+                        <form #personalForm="ngForm" class="editForm" novalidate>
+                            <h4 class="head text-center">Please enter recipients.</h4>
+                            <br />
+                            <div class='row justify-content-center'>
+                                <div class='col-4'>
+                                    <div class="form-group">
+                                        <div class="custom-control custom-radio m-0">
+                                            <input type="radio" #entryModeRadio required id="entryModeRadioInput"
+                                                name="entryModeRadio" class="custom-control-input" value="INPUT"
+                                                [(ngModel)]="entryMode" checked>
+                                            <label class="custom-control-label" for="entryModeRadioInput">Type the numbers in</label>
+                                        </div>
+                                        <div class="custom-control custom-radio m-0">
+                                            <input type="radio" #entryModeRadio required id="entryPointRadioFile"
+                                                name="entryModeRadio" class="custom-control-input"
+                                                [(ngModel)]="entryMode" value="FILE">
+                                            <label class="custom-control-label" for="entryPointRadioFile">Upload a file</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class='row' *ngIf="entryMode === 'INPUT'">
+                                <div class='col-12'>
+                                    <div class="row">
+                                        <div class='col-12 col-sm-12'>
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="recipient_input">Phone
+                                                    Number</label>
+                                                <input class="form-control input-md" [(ngModel)]="phoneNumber"
+                                                    #recipient_input="ngModel" placeholder="2547000000" required
+                                                    id="recipient_input" name="recipient_input" type="text">
+                                                <small class="form-text text-muted danger"
+                                                    *ngIf="!recipient_input.valid && (recipient_input.dirty || recipient_input.touched)">This
+                                                    field is required!</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-primary btn-raised"
+                                            (click)="pushToRecipients(personalForm)">Add
+                                        </button>
+                                    </div>
+                                    <div class="row">
+                                        <div class="btn btn-small btn-secondary m-1 chip"
+                                            *ngFor="let recipient of recipients">
+                                            {{recipient}}
+                                            <button class="btn btn-sm btn-secondary"
+                                                (click)="removePhoneNumber(recipient)">X
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row" *ngIf="entryMode === 'FILE'">
+                                <form class="col-md-12 col-lg-12" name="sms_upload">
+                                    <div class="col-lg-12 col-md-12">
+                                        <fieldset class="form-group">
+                                            <label for="file">Upload Csv File</label>
+                                            <!-- <label class="custom-file  mx-auto d-block">
+                                                  <input type="file" id="file" class="custom-file-input">
+                                                  <span class="custom-file-control"></span>
+                                                </label> -->
+                                            <div class="custom-file  mx-auto d-block">
+                                                <input type="file"  class="custom-file-input" id="smsFileInput" accept=".csv" (change)="validateFile($event)">
+                                                <label class="custom-file-label" for="inputGroupFile01"> {{ file && file.file ? file.file.name : 'Choose file' }} </label>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </form>
+                            </div>
+                            <br/>
+                            <div class="form-group text-center">
+                                <button type="button" uiSref="work" class="btn btn-info btn-raised"
+                                    [disabled]="(!recipients || recipients.length < 1) && !file.payload" awNextStep>
+                                    Next
+                                    <span style="margin-left:10px;">
+                                        <i class="ft-chevron-right"></i>
+                                    </span>
+                                </button>
+                            </div>
+                        </form>
+                    </aw-wizard-step>
+                    <aw-wizard-step [stepTitle]="'Compose'"
+                        [navigationSymbol]="{ symbol: '&#xf0ac;', fontFamily: 'FontAwesome' }">
+                        <form #addressForm="ngForm" class="editForm" novalidate>
+                            <h4 class="head text-center">Compose message</h4>
+                            <br />
+                            <div class='row'>
+                                <div class='col-sm-12'>
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="message_input">Message</label>
+                                        <textarea class="form-control input-md" [(ngModel)]="message"
+                                            #message_input="ngModel" required id="message_input"
+                                            name="message_input"></textarea>
+                                        <small class="form-text text-muted danger"
+                                            *ngIf="!message_input.valid && (message_input.dirty || message_input.touched)">This
+                                            field is
+                                            required!</small>
+
+                                    </div>
+                                    <div class="form-group text-center space-20">
+                                        <button uiSref="personal" type="button"
+                                            class="btn btn-raised btn-secondary mr-1" awPreviousStep>
+                                            <span style="margin-right:10px;">
+                                                <i class="ft-chevron-left"></i>
+                                            </span> Previous
+                                        </button>
+                                        <button uiSref="address" type="button" class="btn btn-raised btn-info"
+                                            [disabled]="!addressForm.valid" awNextStep>
+                                            Next
+                                            <span style="margin-left:10px;">
+                                                <i class="ft-chevron-right"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+
+                    </aw-wizard-step>
+                    <aw-wizard-step [stepTitle]="'When should we send?'"
+                        [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
+                        <form #workForm="ngForm" class="editForm" novalidate>
+                            <h4 class="head text-center">Compose message</h4>
+                            <br />
+                            <div class='row justify-content-center'>
+                                <div class='col-4'>
+                                    <div class="form-group">
+                                        <div class="custom-control custom-radio m-0">
+                                            <input type="radio" #send_option required id="customRadioInline1"
+                                                name="send_option" class="custom-control-input" value="T"
+                                                [(ngModel)]="options.sendNow" checked>
+                                            <label class="custom-control-label" for="customRadioInline1">Now</label>
+                                        </div>
+                                        <div class="custom-control custom-radio m-0">
+                                            <input type="radio" #send_option required id="customRadioInline2"
+                                                name="send_option" class="custom-control-input"
+                                                [(ngModel)]="options.sendNow" value="F">
+                                            <label class="custom-control-label" for="customRadioInline2">Schedule for
+                                                later</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <input type="datetime-local" class="form-control input-md"
+                                        name="schedule_time_input" id="schedule_time_input" #schedule_time_input
+                                        [(ngModel)]="scheduleTime" [disabled]="options.sendNow === 'T'">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group text-center">
+                                <button uiSref="work" type="button" class="btn btn-raised btn-secondary mr-1"
+                                    awPreviousStep>
+                                    <span style="margin-right:10px;">
+                                        <i class="ft-chevron-left"></i>
+                                    </span> Previous
+                                </button>
+                                <button (click)="post()" type="button" class="btn btn-raised btn-success"
+                                    [disabled]="!workForm.valid" awResetWizard>
+                                    Finish
+                                    <span style="margin-left:10px;">
+                                        <i class="ft-chevron-right"></i>
+                                    </span>
+                                </button>
+                            </div>
+                        </form>
+                    </aw-wizard-step>
+                </aw-wizard>
+
+
+            </div>
+        </div>
+    </div>
+</section>
