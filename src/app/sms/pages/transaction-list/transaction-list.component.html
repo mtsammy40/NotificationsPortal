@@ -19,7 +19,7 @@
               <tr>
                 <th>Id</th>
                 <th>amount</th>
-                <th>Church Member Id</th>
+                <th>Full Name</th>
                 <th>Status</th>
                 <th>Transaction Type</th>
                 <th>Mpesa RefId</th>
@@ -30,11 +30,11 @@
               <tr *ngFor="let transaction of transactions">
                 <td>{{transaction.id}}</td>
                 <td>{{transaction.amount}}</td>
-                <td>{{transaction.churchMemberId}}</td>
+                <td>{{transaction.fullName}}</td>
                 <td>{{transaction.status}}</td>
                 <td>{{transaction.transactionType}}</td>
                 <td>{{transaction.mpesaRefId}}</td>
-                <td>{{transaction.transactionDate}}</td>
+                <td>{{transaction.transactionDate | date:'medium'}}</td>
               </tr>
               </tbody>
             </table>
