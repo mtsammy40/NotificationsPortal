@@ -36,4 +36,8 @@ export class AppService {
     postMessageFile(postMessageFileRequest: FormData) {
         return this.http.post(this.getUrl(environment.post_message_file), postMessageFileRequest);
     }
+
+    getDashboard() {
+        return this.http.get(this.getUrl(environment.get_dashboard));
+    }
 }

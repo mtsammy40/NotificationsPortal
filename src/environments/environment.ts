@@ -11,6 +11,7 @@ export const environment = {
     get_transactions: '/app/transactions',
     post_messages: '/app/postMessage',
     post_message_file: '/app/uploadSmsFile',
+    get_dashboard: '/app/dashboard',
 
     phoneNumberRegExp: '^(254)[0-9]{9}$'
 };

@@ -1,4 +1,6 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ApiResponse } from 'app/sms/models/ApiResponse';
 import { AppService } from '../../../sms/services/app.service';
 
 @Component({
@@ -18,8 +20,11 @@ export class TransactionListComponent implements OnInit {
     }
 
     fetchTransactions() {
-        this.as.getTransactions().subscribe((res: []) => {
-            this.transactions = res;
+        this.as.getTransactions().subscribe((res: ApiResponse) => {
+            this.transactions = res.data.content;
+            let errorMessage = res.message;
+        }, (error: HttpErrorResponse) => {
+          let errorMessage: string = error.error.message;
         });
     }
 }

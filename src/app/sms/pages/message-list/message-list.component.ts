@@ -1,4 +1,6 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
+import { ApiResponse } from 'app/sms/models/ApiResponse';
 import {AppService} from '../../services/app.service';
 
 @Component({
@@ -18,8 +20,11 @@ export class MessageListComponent implements OnInit {
     }
 
     fetchMessages() {
-        this.as.getMessages().subscribe((res: []) => {
-            this.messages = res;
+        this.as.getMessages().subscribe((res: ApiResponse) => {
+            this.messages = res.data.content;
+            let errorMessage = res.message;
+        }, (error: HttpErrorResponse) => {
+            let errorMessage = error.error.message;
         });
     }
 }

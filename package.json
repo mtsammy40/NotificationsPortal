@@ -59,6 +59,7 @@
     "ngx-perfect-scrollbar": "7.2.1",
     "ngx-quill": "5.1.0",
     "ngx-toastr": "10.0.4",
+    "ngx-ui-loader": "^8.0.0",
     "ngx-ui-switch": "8.0.1",
     "node-sass": "4.12.0",
     "nouislider": "13.1.5",
