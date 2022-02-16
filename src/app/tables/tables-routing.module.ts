@@ -6,6 +6,7 @@ import { MessageListComponent } from '../sms/pages/message-list/message-list.com
 import { ExtendedTableComponent } from "./extended/extended-table.component";
 import { RegularTableComponent } from "./regular/regular-table.component";
 import { SmartTableComponent } from "./smart-data-table/smart-data-table.component";
+import { UsersComponent } from 'app/sms/pages/users/users.component';
 
 const routes: Routes = [
   {
@@ -47,7 +48,14 @@ const routes: Routes = [
         data: {
           title: 'Regular Table'
         }
-      },     
+      },  
+      {
+        path: 'users',
+        component: UsersComponent,
+        data: {
+          title: 'Users'
+        }
+      },   
     ]
   }
 ];

@@ -1,44 +1,39 @@
 <!--Extended Table starts-->
 <div class="row text-left">
-  <div class="col-12">
-    <div class="content-header">Messages</div>
-    <p class="content-sub-header">List of messages</p>
-  </div>
+    <div class="col-12">
+        <div class="content-header">Messages</div>
+        <p class="content-sub-header">List of messages</p>
+    </div>
 </div>
 <section id="extended">
-  <div class="row text-left">
-    <div class="col-sm-12">
-      <div class="card">
-        <div class="card-header">
-          <h4 class="card-title">Messages</h4>
+    <div class="row text-left">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Messages</h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <!-- ngx-datatable -->
+                        <ngx-datatable
+                                class="material"
+                                [rows]="messages"
+                                [columns]="columns"
+                                [columnMode]="'force'"
+                                [headerHeight]="50"
+                                [footerHeight]="50"
+                                rowHeight="auto"
+                                [externalPaging]="true"
+                                [count]="pageProfile.totalElements"
+                                [offset]="pageProfile.pageNumber"
+                                [limit]="pageProfile.pageSize"
+                                (page)="setPage($event)"
+                        >
+                        </ngx-datatable>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="card-content">
-          <div class="card-body">
-            <table class="table table-responsive-md text-center" *ngIf="messages && messages.length > 0">
-              <thead>
-              <tr>
-                <th>Id</th>
-                <th>Msisdn</th>
-                <th>Status</th>
-                <th>Message</th>
-                <th>Date Created</th>
-                <th>Actions</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr *ngFor="let message of messages">
-                <td>{{message.id}}</td>
-                <td>{{message.msisdn}}</td>
-                <td>{{message.status}}</td>
-                <td>{{message.message}}</td>
-                <td>{{message.dateCreated | date : 'medium'}}</td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
 </section>
 <!--Extended Table Ends-->

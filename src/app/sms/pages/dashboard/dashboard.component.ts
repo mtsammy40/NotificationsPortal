@@ -26,7 +26,10 @@ export interface Chart {
 export class DashboardComponent implements OnInit {
 
     dashData = {
-        smsBalance: 0
+        smsBalance: 0,
+        failed: 0,
+        sent: 0,
+        success: 0
     };
 
     // Line area chart configuration Starts

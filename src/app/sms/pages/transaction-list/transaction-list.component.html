@@ -14,30 +14,46 @@
         </div>
         <div class="card-content">
           <div class="card-body">
-            <table class="table table-responsive-md text-center" *ngIf="transactions && transactions.length > 0">
-              <thead>
-              <tr>
-                <th>Id</th>
-                <th>amount</th>
-                <th>Full Name</th>
-                <th>Status</th>
-                <th>Transaction Type</th>
-                <th>Mpesa RefId</th>
-                <th>Transaction Date</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr *ngFor="let transaction of transactions">
-                <td>{{transaction.id}}</td>
-                <td>{{transaction.amount}}</td>
-                <td>{{transaction.fullName}}</td>
-                <td>{{transaction.status}}</td>
-                <td>{{transaction.transactionType}}</td>
-                <td>{{transaction.mpesaRefId}}</td>
-                <td>{{transaction.transactionDate | date:'medium'}}</td>
-              </tr>
-              </tbody>
-            </table>
+<!--            <table class="table table-responsive-md text-center" *ngIf="transactions && transactions.length > 0">-->
+<!--              <thead>-->
+<!--              <tr>-->
+<!--                <th>Id</th>-->
+<!--                <th>amount</th>-->
+<!--                <th>Full Name</th>-->
+<!--                <th>Status</th>-->
+<!--                <th>Transaction Type</th>-->
+<!--                <th>Mpesa RefId</th>-->
+<!--                <th>Transaction Date</th>-->
+<!--              </tr>-->
+<!--              </thead>-->
+<!--              <tbody>-->
+<!--              <tr *ngFor="let transaction of transactions">-->
+<!--                <td>{{transaction.id}}</td>-->
+<!--                <td>{{transaction.amount}}</td>-->
+<!--                <td>{{transaction.fullName}}</td>-->
+<!--                <td>{{transaction.status}}</td>-->
+<!--                <td>{{transaction.transactionType}}</td>-->
+<!--                <td>{{transaction.mpesaRefId}}</td>-->
+<!--                <td>{{transaction.transactionDate | date:'medium'}}</td>-->
+<!--              </tr>-->
+<!--              </tbody>-->
+<!--            </table>-->
+
+            <ngx-datatable
+                    class="material"
+                    [rows]="transactions"
+                    [columns]="columns"
+                    [columnMode]="'force'"
+                    [headerHeight]="50"
+                    [footerHeight]="50"
+                    rowHeight="auto"
+                    [externalPaging]="true"
+                    [count]="pageProfile.totalElements"
+                    [offset]="pageProfile.pageNumber"
+                    [limit]="pageProfile.pageSize"
+                    (page)="setPage($event)"
+            >
+            </ngx-datatable>
           </div>
         </div>
       </div>

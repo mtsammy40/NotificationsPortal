@@ -13,6 +13,7 @@ import { InputGroupsComponent } from './elements/input-groups/input-groups.compo
 import { InputGridComponent } from './elements/input-grid/input-grid.component';
 import { ArchwizardComponent } from './archwizard/archwizard.component';
 import { SendComponent } from 'app/sms/pages/send/send.component';
+import { AddUpdateUserComponent } from 'app/sms/pages/add-update-user/add-update-user.component';
 
 const routes: Routes = [
   {
@@ -106,8 +107,15 @@ const routes: Routes = [
         data: {
           title: 'Send Form'
         }
-      },   
-            
+      },  
+       
+      {
+        path: 'add-update-user',
+        component: AddUpdateUserComponent,
+        data: {
+          title: 'Add / Update User Form'
+        }
+      },      
     ]
   }
 ];
