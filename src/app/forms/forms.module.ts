@@ -21,6 +21,8 @@ import { InputGroupsComponent } from './elements/input-groups/input-groups.compo
 import { InputGridComponent } from './elements/input-grid/input-grid.component';
 import { ArchwizardComponent } from './archwizard/archwizard.component';
 import { SendComponent } from '../sms/pages/send/send.component';
+import { AddUpdateUserComponent } from 'app/sms/pages/add-update-user/add-update-user.component';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 @NgModule({
     imports: [
@@ -32,7 +34,8 @@ import { SendComponent } from '../sms/pages/send/send.component';
         ArchwizardModule,
         CustomFormsModule,
         MatchHeightModule,
-        NgbModule
+        NgbModule,
+        NgxUiLoaderModule
     ],
     declarations: [
         ValidationFormsComponent,
@@ -46,7 +49,8 @@ import { SendComponent } from '../sms/pages/send/send.component';
         InputGroupsComponent,
         InputGridComponent,
         ArchwizardComponent,
-        SendComponent
+        SendComponent,
+        AddUpdateUserComponent
     ]
 
 })

@@ -19,6 +19,13 @@ export const ROUTES: RouteInfo[] = [
             { path: '/tables/transactions', title: 'List', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
         ]
     },
+    {
+        path: '', title: 'Users', icon: 'ft-box', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
+        submenu: [
+            { path: '/tables/users', title: 'List', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+            { path: '/forms/add-update-user', title: 'User Creation', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+        ]
+    },
 ];
 
 // export const ROUTES: RouteInfo[] = [

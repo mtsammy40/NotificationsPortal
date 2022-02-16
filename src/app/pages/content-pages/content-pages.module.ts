@@ -13,13 +13,15 @@ import { MaintenancePageComponent } from "./maintenance/maintenance-page.compone
 import { RegisterPageComponent } from "./register/register-page.component";
 
 import { LoginComponent } from "../../sms/pages/login/login.component"; 
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 
 @NgModule({
     imports: [
         CommonModule,
         ContentPagesRoutingModule,
-        FormsModule        
+        FormsModule,
+        NgxUiLoaderModule      
     ],
     declarations: [
         ComingSoonPageComponent,

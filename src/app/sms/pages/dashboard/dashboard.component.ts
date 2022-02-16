@@ -1,4 +1,7 @@
+import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
+import { ApiResponse } from 'app/sms/models/ApiResponse';
+import { AppService } from 'app/sms/services/app.service';
 import * as Chartist from 'chartist';
 import { ChartType, ChartEvent } from 'ng-chartist';
 
@@ -20,7 +23,14 @@ export interface Chart {
     styleUrls: ['./dashboard.component.scss']
 })
 
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
+
+    dashData = {
+        smsBalance: 0,
+        failed: 0,
+        sent: 0,
+        success: 0
+    };
 
     // Line area chart configuration Starts
     lineArea: Chart = {
@@ -409,5 +419,21 @@ export class DashboardComponent {
         },
     };
     // Line chart configuration Ends
+
+    constructor(private as: AppService ) {
+    }
+    ngOnInit(): void {
+        this.getDashboardStats();
+    }
+
+    getDashboardStats() {
+        this.as.getDashboard().subscribe((res: ApiResponse) => {
+            if(ApiResponse.isSuccess(res)) {
+                this.dashData.smsBalance = res.data.smsBalance;
+            }
+        },(error) => {
+           console.log('Error ', error);
+        });
+    }
 
 }

@@ -6,7 +6,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { SharedModule } from "./shared/shared.module";
 import { ToastrModule } from "ngx-toastr";
 import { AgmCoreModule } from "@agm/core";
-import { HttpClientModule, HttpClient } from "@angular/common/http";
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { StoreModule } from "@ngrx/store";
@@ -24,6 +24,9 @@ import { FullLayoutComponent } from "./layouts/full/full-layout.component";
 import { DragulaService } from "ng2-dragula";
 import { AuthService } from "./shared/auth/auth.service";
 import { AuthGuard } from "./shared/auth/auth-guard.service";
+import { TokenInterceptor } from "./sms/interceptors/token.interceptor";
+import { NgxUiLoaderModule } from "ngx-ui-loader";
+import { SpinnerService } from "./sms/services/spinner.service";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -54,17 +57,20 @@ export function createTranslateLoader(http: HttpClient) {
     AgmCoreModule.forRoot({
       apiKey: "YOUR KEY"
     }),
-    PerfectScrollbarModule
+    PerfectScrollbarModule,
+    NgxUiLoaderModule
   ],
   providers: [
     AuthService,
+    SpinnerService,
     AuthGuard,
     DragulaService,
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
     },
-    { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG }
+    { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG },
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

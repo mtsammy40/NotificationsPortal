@@ -20,6 +20,7 @@ import { SidebarLinkDirective } from './directives/sidebarlink.directive';
 import { SidebarListDirective } from './directives/sidebarlist.directive';
 import { SidebarAnchorToggleDirective } from './directives/sidebaranchortoggle.directive';
 import { SidebarToggleDirective } from './directives/sidebartoggle.directive';
+import { AuthService } from './auth/auth.service';
 
 @NgModule({
     exports: [
@@ -53,6 +54,9 @@ import { SidebarToggleDirective } from './directives/sidebartoggle.directive';
         SidebarListDirective,
         SidebarAnchorToggleDirective,
         SidebarToggleDirective
+    ],
+    providers: [
+        AuthService
     ]
 })
 export class SharedModule { }
